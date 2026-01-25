@@ -1,0 +1,38 @@
+module fifo_testbench;
+
+reg clk,rst,write_enb,rd_enb;
+reg [7:0] data_in;
+wire [7:0] data_out;
+wire full;
+wire empty;
+
+fifo dut(clk,rst,write_enb,rd_enb,data_in,data_out,full,empty);
+
+initial
+begin
+{clk,rst,write_enb,rd_enb,data_in} = 0;
+end
+
+always #5 clk = ~clk;
+
+initial
+begin
+rst = 1'b1;
+#10;
+rst = 0;
+
+write_enb = 1'b1;
+data_in = 8'd5;
+#13.33;
+write_enb = 1'b1;
+data_in = 8'd10;
+#13.33;
+write_enb = 0;
+#20;
+rd_enb = 1'b1;
+#40;
+$finish;
+
+end
+
+endmodule
