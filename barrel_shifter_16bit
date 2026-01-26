@@ -1,0 +1,24 @@
+module barrel_shifter_01(
+    input [15:0] data_in,
+    input  [3:0] ctrl, // shift amount (0-15)
+    input dir, // 0 = left, 1 = right
+    input arith,   // 0 = LSR, 1 = ASR
+    output [15:0] data_out
+);
+wire signed [15:0] sdata;
+    assign sdata = data_in;
+
+    reg [15:0] result;
+
+    always@(*)begin
+        case({dir,arith} )
+            2'b00: result = data_in << ctrl;// LSL
+            2'b10: result = data_in >> ctrl;// LSR
+            2'b11: result = sdata >>> ctrl;// ASR
+            default: result = data_in;
+        endcase
+    end
+    assign data_out = result;
+
+
+endmodule
