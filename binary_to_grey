@@ -1,0 +1,10 @@
+//binary to grey 4 bit 
+module gray_code(
+input [3:0] bi,
+output [3:0] gr
+    );
+    
+    assign gr = {bi[3], bi[3] ^ bi[2] , bi[2] ^ bi[1], bi[1] ^ bi[0]};
+    
+    
+endmodule
