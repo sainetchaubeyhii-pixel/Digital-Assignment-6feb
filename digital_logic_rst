@@ -1,0 +1,25 @@
+module design_login(
+    input clk,
+    input rst,
+    input event01,
+    output reg data_out
+);
+
+    reg captured; // remembers if first event already happened
+
+    always @(posedge clk) begin
+        if (rst) begin
+            captured <= 1'b0;
+            data_out <= 1'b0;
+        end
+        else if (event01 && !captured) begin
+            data_out <= 1'b1;   // capture first event
+            captured <= 1'b1;   // lock further events
+        end
+        else begin
+            data_out <= 1'b0;   // ignore further events
+        end
+    end
+
+endmodule
+
