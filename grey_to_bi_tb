@@ -1,0 +1,19 @@
+module grey_binary_testbench;
+
+reg [3:0] gr;
+wire [3:0] bi;
+
+grey_to_binary dut(gr,bi);
+
+initial
+begin
+gr = 4'b0000;
+end
+
+initial
+begin
+
+gr = 4'b1010;
+
+end
+endmodule
