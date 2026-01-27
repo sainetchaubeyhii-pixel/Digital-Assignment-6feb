@@ -1,0 +1,17 @@
+
+module grey_code_testbench;
+reg [3:0] bi;
+wire [3:0] gr;
+
+gray_code dut(bi,gr);
+
+initial 
+begin
+bi = 4'b0000;
+end
+
+initial
+begin
+bi = 4'b1010;
+end
+endmodule
