@@ -1,0 +1,31 @@
+
+module tb_edge_detector;
+reg clk;
+reg signal;
+wire pe;
+
+edge_detector dut(clk,signal,pe);
+
+initial
+begin
+{clk,signal} = 0;
+end
+
+always #5 clk = ~clk;
+
+initial
+begin
+#10;
+
+signal = 1'b1;
+#10;
+signal = 1'b0;
+#10;
+signal = 1'b1;
+#10;
+signal = 1'b0;
+#10;
+
+$finish;
+end
+endmodule
