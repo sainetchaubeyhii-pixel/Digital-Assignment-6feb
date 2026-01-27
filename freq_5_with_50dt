@@ -1,0 +1,29 @@
+module freq_5_50dt(
+    input  clk,
+    input  rst,
+    input  enb,
+    output reg f_5_50dt
+);
+
+    reg [2:0] counter;
+
+    always @(posedge clk) begin
+        if (rst) begin
+            counter    <= 3'b000;
+            f_5_50dt   <= 1'b0;
+        end
+        else if (enb) begin
+            if (counter == 3'b100) //4
+                counter <= 3'b000;
+            else
+                counter <= counter + 1'b1;
+
+        // appoximately 40-50% duty cycle
+            if (counter < 3'b010) // 2 
+                f_5_50dt <= 1'b1; // 0 and 1 count when high and 3,4,5 when low
+            else
+                f_5_50dt <= 1'b0;
+        end
+    end
+
+endmodule
