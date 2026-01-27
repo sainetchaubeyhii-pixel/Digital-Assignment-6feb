@@ -1,15 +1,15 @@
 module ne_detector(
 input clk,signal,
-output reg ne
+output ne
     );
     
     reg previous;
     
     always@(negedge clk) begin
-    ne <= ~previous & signal;
+    
     previous <= signal;
      end
     
-    
+    assign ne <= previous & ~signal;
     
 endmodule
