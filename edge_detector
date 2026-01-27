@@ -1,0 +1,14 @@
+module edge_detector(
+input clk,
+input signal, //present signal
+output reg pe //positive edge 
+    );
+    reg previous; //previous state of signal
+    
+    always@(posedge clk)
+    begin
+    pe <= ~previous & signal;
+    previous <= signal; // positive edge ke liye previous signal ko pst signal ke equal krna padega
+    end
+    
+endmodule
