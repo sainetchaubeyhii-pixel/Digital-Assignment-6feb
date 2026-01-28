@@ -1,0 +1,31 @@
+
+module tb_one_to_n_cycle;
+
+reg rst;
+reg clk;
+reg pulse_in;
+wire pulse_out;
+
+one_clock_cycle_into_N dut(rst,clk,pulse_in,pulse_out);
+
+initial
+begin
+{rst,clk,pulse_in} = 0;
+end
+
+always #5 clk = ~clk;
+
+initial
+begin
+#10;
+rst = 1;
+#10;
+rst = 0;
+#10;
+pulse_in = 1;
+#10;
+pulse_in = 0;
+
+#80 $finish;
+end
+endmodule
