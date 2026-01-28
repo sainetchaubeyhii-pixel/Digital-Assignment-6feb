@@ -5,8 +5,6 @@ module barrel_shifter_01(
     input arith,   // 0 = LSR, 1 = ASR
     output [15:0] data_out
 );
-wire signed [15:0] sdata;
-    assign sdata = data_in;
 
     reg [15:0] result;
 
