@@ -1,0 +1,23 @@
+
+module minimal_xor(
+input [7:0] a,b,
+output reg [1:0] y
+    );
+    
+    wire equal;
+    
+    assign equal = ~|(a^b);
+    
+    always@(*) begin
+    if(equal) begin
+    y = 2'b00;
+    end
+    else if (a > b) begin
+    y = 2'b01;
+    end
+    else if (a < b)begin
+    y = 2'b11;
+    end
+    end
+    
+endmodule
