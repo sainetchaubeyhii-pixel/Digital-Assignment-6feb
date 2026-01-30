@@ -1,0 +1,31 @@
+
+module testbench_round_robin_arbiter;
+reg [3:0] req;
+reg clk,rst_n;
+wire [3:0] gnt;
+
+round_robin_arbiter dut(req,clk,rst_n,gnt);
+
+initial
+begin
+{clk,rst_n} = 0;
+req = 4'b0000;
+end
+
+always #5 clk = ~clk;
+
+initial
+begin
+#10;
+rst_n = 1'b1;
+
+req = 4'b0001;
+#20;
+req = 4'b0100;
+#20;
+req = 4'b0011;
+end
+
+
+
+endmodule
