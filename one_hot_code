@@ -1,0 +1,19 @@
+
+module one_hot(
+input [7:0] data_in,
+output reg  [2:0] bi_out
+    );
+    
+    integer i;
+    
+    
+    always@(*) begin
+    bi_out = 3'b000; //default
+    for(i = 0 ; i < 8 ; i = i + 1)begin
+    if(data_in[i] == 1'b1) begin
+    bi_out = i[2:0];
+    end
+  end
+    
+  end  
+endmodule

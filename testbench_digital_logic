@@ -1,0 +1,48 @@
+module testbench_design_logic;
+reg clk;
+reg rst;
+reg event01;
+wire data_out;
+
+design_login dut(clk,rst,event01,data_out);
+
+initial
+begin
+{clk,rst,event01} = 1'b0;
+end
+
+always #5 clk = ~clk;
+
+initial
+begin
+rst = 1'b1;
+#15;
+
+rst = 1'b0;
+event01 = 1'b1;
+#10;
+
+event01 = 1'b0;
+#10;
+event01 = 1'b1;
+#10;
+
+event01 = 1'b0;
+#10;
+
+event01 = 1'b1;
+#10;
+rst = 1'b1;
+#10;
+rst = 1'b0;
+event01 = 1'b0;
+#10;
+event01 = 1'b0;
+#10;
+
+event01 = 1'b1;
+#80;
+
+$finish;
+
+end

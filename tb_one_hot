@@ -1,0 +1,26 @@
+
+module tb_hot;
+reg [7:0] data_in;
+wire [2:0] bi_out;
+
+one_hot dut(
+.data_in(data_in),
+.bi_out(bi_out)
+);
+
+//initial 
+//begin
+//data_in = 0;
+//end
+
+initial
+begin
+
+data_in = 8'b01000000;
+#20;
+data_in = 8'b10000000;
+#10;
+$finish;
+end
+
+endmodule

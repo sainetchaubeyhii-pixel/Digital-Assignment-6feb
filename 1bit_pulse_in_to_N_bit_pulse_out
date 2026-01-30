@@ -1,0 +1,45 @@
+
+module one_clock_cycle_into_N #(parameter N = 5)( //Taaki N hard-coded na ho issi liye parameter use kiye hai 
+//AUR Same code se alag-alag number of pulses bana sako
+input rst,clk,pulse_in, // pulse_in apna 1 clock input hai 
+output reg pulse_out
+); 
+
+reg [4:0] count; //[4:0] use karunga toh main maximum 32 tak pulse repeat / divide kar sakta hoon
+reg running; // MACHINE CHAL RAHI HAI YA NHI , 0 HAI MATLAB PULSE_IN ABHI KUCH NHI HAI ,
+// RUNNING 1 MATLAB PULSE GENERATE HO GYI
+
+always@(posedge clk) begin
+
+if (rst) begin
+count <= 0;
+running <= 0;
+pulse_out <= 0;
+//sab kuch band
+//counter = empty
+//output low
+end
+
+// yaha se repeatation start ho gya
+else if(pulse_in && !running) begin
+count <= N; // N pulses banani hai
+running <= 1; // pahle se process start hui 
+pulse_out <= 1; // pahli pulse on 
+end
+
+//isse seperate pulses banti hai , constant ki jagah 
+else if (running) begin
+pulse_out <= ~pulse_out; // toggle
+
+ if (pulse_out) // jab pulse_out 1 hoga tab ek pulse complete maani jayegi   // count only HIGH pulses
+          //Isliye count kam hota hai
+   count <= count - 1;
+   
+        if (count == 1 && pulse_out) begin // yeah last high pulse hai
+            running <= 0; // process khatam
+            pulse_out <= 0;
+            count <= 0;
+            // exactly N pulses ban chuki hein
+        end
+    end
+end

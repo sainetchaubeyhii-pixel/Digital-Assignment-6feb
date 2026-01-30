@@ -1,0 +1,31 @@
+
+module ne_testbench;
+reg clk;
+reg signal;
+wire ne;
+
+ne_detector dut(clk,signal,ne);
+
+initial
+begin
+{clk,signal} = 0;
+end
+
+always #5 clk = ~clk;
+
+initial
+begin
+#10;
+
+signal = 1'b1;
+#10;
+signal = 1'b0;
+#45;
+signal = 1'b1;
+#80;
+signal = 1'b0;
+#90;
+
+$finish;
+end
+endmodule

@@ -1,0 +1,21 @@
+
+module The_2ff_synchronizer(
+input clk,rst,
+input [2:0] async,
+output reg [2:0] sync
+    );
+    reg [2:0] ff1_out;
+    
+    always@(posedge clk) begin
+    if(rst) begin
+    ff1_out <= 3'b000;
+    sync <= 3'b000;
+    end
+    
+    else begin
+    ff1_out <= async;
+    sync <= ff1_out;
+    end
+    
+    end
+endmodule

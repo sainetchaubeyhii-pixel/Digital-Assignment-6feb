@@ -1,0 +1,34 @@
+module testbench_mod_16_updown;
+reg clk;
+reg rst;
+reg enb;
+wire [3:0] count;
+
+mod_16_updown dut(clk,rst,enb,count);
+
+always #5 clk = ~clk;
+
+initial
+begin
+clk = 0;
+rst = 1'b1;
+end
+
+
+initial
+ begin
+    #10   rst = 0;       //release reset
+
+  
+    #160 enb = 1;
+   
+
+    #160 enb = 0;
+   #160 enb = 1;
+
+
+   #4000  $finish;
+   
+end
+
+endmodule

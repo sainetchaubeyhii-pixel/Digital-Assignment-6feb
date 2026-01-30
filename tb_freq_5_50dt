@@ -1,0 +1,31 @@
+module tb_50dt_freq_5;
+reg clk,rst,enb;
+wire f_5_50dt;
+
+freq_5_50dt dut(clk,rst,enb,f_5_50dt);
+
+initial
+begin
+{clk,rst,enb} = 0;
+end 
+
+always #5 clk = ~clk;
+
+initial
+begin
+rst = 1'b1;
+#20;
+rst = 0;
+
+enb = 1'b1;
+#200;
+
+enb = 1'b0;
+#20;
+
+enb = 1'b1;
+#100;
+
+$finish;
+end
+endmodule

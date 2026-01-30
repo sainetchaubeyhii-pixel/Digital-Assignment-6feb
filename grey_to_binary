@@ -1,0 +1,12 @@
+module grey_to_binary(
+input [3:0] gr,
+output [3:0] bi
+    );
+    wire internal1;
+    wire internal2;
+    
+    assign internal1 = gr[3] ^ gr[2];
+    assign internal2 = internal1 ^ gr[1];
+    assign bi = {gr[3],internal1,internal2,internal2 ^ gr[0]};
+    
+endmodule

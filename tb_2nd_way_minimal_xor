@@ -1,0 +1,30 @@
+
+module minimal_xor_direct_tb;
+reg [7:0] a;
+reg [7:0] b;
+wire gt,lt,eq;
+
+minimal_xor_direct dut (a,b,gt,lt,eq);
+
+//initial
+//begin
+//{a,b} = 0;
+//end
+
+initial
+begin
+a = 8'b00000010;
+b = 8'b00000001;
+#20;
+
+a = 8'b00000011;
+b = 8'b00000011;
+#20;
+
+a = 8'b00001111; //15
+b = 8'b00110000; //48
+#30;
+end
+
+
+endmodule

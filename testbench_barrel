@@ -1,0 +1,38 @@
+
+module barrel_shifter_01_testbench;
+reg [15:0] data_in;
+reg [3:0] ctrl;
+reg dir;
+reg arith;
+wire [15:0] data_out;
+
+barrel_shifter_01 dut(data_in,ctrl,dir,arith,data_out);
+
+initial
+begin
+{data_in,ctrl,dir,arith} = 0;
+end
+
+initial
+begin
+dir = 1'b1;
+arith = 1'b1;
+ctrl = 4'b0101;
+data_in = 16'h0004;
+#10;
+
+dir = 1'b0;
+arith = 1'b0;
+ctrl = 4'b0001;
+data_in = 16'h0005;
+#20;
+
+dir = 1'b1;
+arith = 1'b0;
+ctrl = 4'b0000;
+data_in = 16'h0020;
+#40;
+
+$finish;
+end
+endmodule
